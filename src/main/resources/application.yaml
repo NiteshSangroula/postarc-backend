@@ -1,3 +1,11 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: PostArc
+
+app:
+  jwt:
+    secret: "this_is_a_super_long_secret_key_for_jwt_change_it_later"
+    expiration: 86400000  #24 hours time

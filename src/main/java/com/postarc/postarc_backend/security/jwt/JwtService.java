@@ -30,7 +30,7 @@ public class JwtService {
         signingKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
-public String generateToken(Map<String, Object> extraClaims, String subject) {
+    public String generateToken(Map<String, Object> extraClaims, String subject) {
         Date now = new Date();
         Date exp = new Date(now.getTime() + expirationMs);
 

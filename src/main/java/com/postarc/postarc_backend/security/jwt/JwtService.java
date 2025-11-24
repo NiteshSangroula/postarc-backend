@@ -30,16 +30,16 @@ public class JwtService {
         signingKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
-public String generateToken(Map<String, Object> extraClaims, String subject) {
+    public String generateToken(Map<String, Object> extraClaims, String subject) {
         Date now = new Date();
         Date exp = new Date(now.getTime() + expirationMs);
 
         return Jwts.builder()
-                .setClaims(extraClaims)     // safe: supplies the claims map
+                .setClaims(extraClaims) // safe: supplies the claims map
                 .setSubject(subject)
                 .setIssuedAt(now)
                 .setExpiration(exp)
-                .signWith(signingKey)       // modern signWith(Key) usage — no SignatureAlgorithm param
+                .signWith(signingKey) // modern signWith(Key) usage — no SignatureAlgorithm param
                 .compact();
     }
 
@@ -65,5 +65,9 @@ public String generateToken(Map<String, Object> extraClaims, String subject) {
         }
     }
 
-    
+    public Long extractUserId(String token) {
+        Claims claims = extractAllClaims(token);
+        return claims.get("userId", Long.class);
+    }
+
 }

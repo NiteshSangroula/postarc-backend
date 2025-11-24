@@ -2,7 +2,6 @@ package com.postarc.postarc_backend.auth;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,8 +23,6 @@ import static org.mockito.Mockito.*;
 class AuthServiceTest {
 
     private UserRepository userRepository;
-
-    @Mock
     private PasswordEncoder passwordEncoder;
     private JwtService jwtService;
     private AuthService authService;

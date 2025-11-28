@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.postarc.postarc_backend.posts.dto.CreatePostRequest;
 import com.postarc.postarc_backend.posts.dto.PostResponse;
@@ -43,6 +45,13 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity<PostResponse> getOne(@PathVariable Long id) {
         return ResponseEntity.ok(postService.getPostById(id));
+    }
+
+    @PostMapping("/{postId}/image")
+    public ResponseEntity<PostResponse> uploadImage(
+            @PathVariable Long postId,
+            @RequestParam("file") MultipartFile imageFile) {
+        return ResponseEntity.ok(postService.uploadImage(postId, imageFile));
     }
 
 }

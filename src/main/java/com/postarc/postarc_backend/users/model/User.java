@@ -53,4 +53,6 @@ public class User {
     @UpdateTimestamp
     private Instant updatedAt;
 
+    private String profilePicture;
+
 }

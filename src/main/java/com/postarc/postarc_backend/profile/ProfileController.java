@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.postarc.postarc_backend.common.dto.ApiResponse;
+
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -16,13 +18,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProfileController {
 
-    private final ProfileService profileService;
+  private final ProfileService profileService;
 
-    @PostMapping("/me/profile-picture")
-    public ResponseEntity<ProfileResponseDTO> uploadProfilePicture(
-            @RequestParam("file") MultipartFile file,
-            Principal principal) {
-        return ResponseEntity.ok(profileService.uploadProfilePicture(file, principal.getName()));
-    }
-
+  @PostMapping("/me/profile-picture")
+  public ResponseEntity<ApiResponse<ProfileResponseDTO>> uploadProfilePicture(
+      @RequestParam("file") MultipartFile file,
+      Principal principal) {
+    ProfileResponseDTO profile = profileService.uploadProfilePicture(file, principal.getName());
+    return ResponseEntity.ok(ApiResponse.success(profile, "Profile picture updated successfully"));
+  }
 }
